@@ -5,6 +5,7 @@ import AddTodo from './components/AddTodo'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { Login } from './components/Login';
 
 function App() {
    const [data,setdata]=useState([]);
@@ -20,8 +21,7 @@ function App() {
     
     <div>
       <h1>TODO APP</h1>
-      <AddTodo fetchTodos={fetchTodos}/>
-      <TodoList data={data}fetchTodos={fetchTodos}/>
+      <Login fetchTodos={fetchTodos} data={data}/>
       
     </div>
   )
