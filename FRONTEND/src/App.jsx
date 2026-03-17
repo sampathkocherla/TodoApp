@@ -1,30 +1,25 @@
-
-import './App.css'
-import TodoList from './components/TodoList'
-import AddTodo from './components/AddTodo'
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
-import { Login } from './components/Login';
+ import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { Login } from "./components/Login";
+import Signup from "./components/Signup";
+import Home from "./pages/Home";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-   const [data,setdata]=useState([]);
-       const fetchTodos=async()=>{
-              const res=await axios.get("http://localhost:8000/todo/alltodos");
-              setdata(res.data.data);
-       }
-       useEffect(()=>{
-           fetchTodos();
-       },[])
-
   return (
-    
-    <div>
-      <h1>TODO APP</h1>
-      <Login fetchTodos={fetchTodos} data={data}/>
-      
-    </div>
-  )
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

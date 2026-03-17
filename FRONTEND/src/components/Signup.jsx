@@ -2,20 +2,19 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Login = () => {
+function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/login", {
+      await axios.post("http://localhost:8000/signup", {
         username,
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -23,10 +22,10 @@ export const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Signup</h2>
 
       <p>
-        Don’t have an account? <Link to="/signup">Signup</Link>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
 
       <input
@@ -42,7 +41,9 @@ export const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleSignup}>Signup</button>
     </div>
   );
-};
+}
+
+export default Signup;
